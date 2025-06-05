@@ -19,7 +19,7 @@ then to build & run:
 ./nob bruh
 ```
 
-and then downloading the [MinOS Specseek Installer (for source)](https://github.com/Mellurboo/SpecSeek/blob/620c6199ec021c5a2d4f976964307b47c0dabd6c/install_specseek.sh)
+and then downloading the [MinOS Specseek Installer (for source)](https://github.com/Mellurboo/MinOS_SpecSeek/blob/82475cb794e18fc412ae0c14de87b33fd7ae3719/install_specseek.sh)
 
 place the script at the root of MinOS and run it. and thats it, you are done!
 
