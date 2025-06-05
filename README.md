@@ -1,8 +1,7 @@
 
 ![Logo](https://i.imgur.com/Zg37VpH.png)
-# SpecSeek. All in One Specification Tool
-
-A soloution to finding everything there is to know about a computers specifications. all in one elegant location. **a great way to share your device specifications support and features**. not sure if your PC supports some functionality? Spec Peek will relay that to you.
+# SpecSeek for MinOS
+A soloution to finding everything there is to know about a computers specifications. all in one elegant location. **a great way to share your device specifications support and features**. not sure if your PC supports some functionality? Spec Peek will relay that to you. all ported to MinOS!
 
 ## Contributing
 I would love to have anyone contribute to fixing bugs or extending feature support, please feel free to make a pull request, or even fork it! *with the licence in mind*.
@@ -10,13 +9,14 @@ I would love to have anyone contribute to fixing bugs or extending feature suppo
 **When contributing please try follow the naming standard used already, and do not add repeat functionality. please keep a simple codebase as a priority.**
 ## Build & Run from Source
 
-to build the ELF executables use the following command
-``` bash
-make
+you can use the MinOS install script below, download it and place it in the root of your MinOS/
 ```
-however to create the Windows Executables use the following command
-``` bash
-make windows
+./install_specseek.sh
+```
+this script will do all the work for you including getting the latest version and making the nob.c file.
+then to build & run:
+```
+./nob bruh
 ```
 
 and then downloading the [MinOS Specseek Installer (for source)](https://github.com/Mellurboo/SpecSeek/blob/620c6199ec021c5a2d4f976964307b47c0dabd6c/install_specseek.sh)
