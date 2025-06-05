@@ -4,7 +4,7 @@
 #define CLEAR_SCREEN() printf("\033[2J\033[H")
 
 #define BLACK   "\e[30m"
-#define RED     "\e[31m"
+#define RED     "\e[94m"
 #define GREEN   "\e[32m"
 #define YELLOW  "\e[33m"
 #define BLUE    "\e[34m"
@@ -20,7 +20,7 @@
 #define BRED     "\e[31m"
 #define BGREEN   "\e[32m"
 #define BYELLOW  "\e[33m"
-#define BBLUE    "\e[34m"
+#define BBLUE    "\e[94m"
 #define BMAGENTA "\e[35m"
 #define BCYAN    "\e[36m"
 #define BWHITE   "\e[37m"
