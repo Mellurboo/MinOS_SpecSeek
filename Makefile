@@ -1,7 +1,6 @@
 #
 # Target Output Details
 #
-GCC_TARGET_32 = specseek_32
 GCC_TARGET_64 = specseek_64
 
 #
