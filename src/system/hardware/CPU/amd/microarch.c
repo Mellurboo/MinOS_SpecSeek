@@ -4,29 +4,88 @@
 /// @param family CPU family
 /// @param model CPU model
 /// @return const char* string describing the microarchitecture
-const char* amd_cpu_get_microarch(unsigned int family, unsigned int model) {
+const char* amd_cpu_get_microarch(unsigned int family, unsigned int model, unsigned int ext_model) {
     switch(family){
-        case 0x17:
+        case 0x05: return "K5";
+        case 0x06: return "K7";
+        case 0x0F: return "K8";
+        case 0x10: return "K10";
+        case 0x11: return "K10 + K8 Hybrid";
+        case 0x12: return "Llano";
+        case 0x14: return "Bobcat";
+        case 0x15:
             switch (model){
-                case 0x00 ... 0x2F:
-                case 0x50 ... 0x5F:
-                    return "Zen";
-                case 0x30 ... 0x4F:
-                case 0x60 ... 0x7f:
-                case 0x90 ... 0x91:
-                case 0xA0 ... 0xAF:
-                    return "Zen+";
+                case 0x01:
+                    return "Bulldozer";
+                case 0x00:
+                    switch (ext_model){
+                        case 0x00:
+                            return "Piledriver";
+                        case 0x03:
+                            return "Steamroller";
+                        case 0x06:
+                        case 0x07:
+                            return "Excavator";
+                        default:
+                            return "Unknown Family 21 Microarch";
+                    }
+                case 0x02:
+                case 0x03:
+                    return "Piledriver";
+                case 0x05:
+                    return "Excavator";
+                case 0x08:
+                    return "Steamroller";
                 default:
-                    return "Unknown Zen/Zen+ Processor"; 
+                    return "Unknown Family 21 Microarch";
             }
+        case 0x16:
+            switch (ext_model){
+                case 0x00:
+                    return "Jaguar";
+                case 0x03:
+                    return "Puma";
+                default:
+                    return "Unknown Family 22 Microarch";
+            }
+        case 0x17:
+            switch (ext_model){
+                case 0x00:
+                    switch (ext_model){
+                        case 0x02:
+                            return "Summit Ridge (Zen)";
+                        case 0x06:
+                        case 0x09:
+                            return "Matisse (Zen 2)";
+                        default:
+                            return "Unknown AMD Zen Microarch";
+                    }
+                case 0x01:
+                    switch(ext_model){
+                        case 0x00:
+                        case 0x01:
+                            return "Summit Ridge (Zen)"; 
+                        case 0x03:
+                        case 0x07:
+                            return "Matisse (Zen 2)";
+                        default:
+                            return "Unknown AMD Zen Microarch";
+                    }
+                case 0x08:
+                    return "Pinnacle Ridge (Zen +)";
+                default:
+                    return "Unknown AMD Zen Microarch";
+            }
+        case 0x18:
+            return "Zen Dhyana (AMD + Chengdu Haiguang)";
         case 0x19:
             switch (model){
                 case 0x00 ... 0x0F:
                 case 0x20 ... 0x5F:
-                    return "Zen 3";
+                    return "Vermeer (Zen 3)";
                 case 0x10 ... 0x1F:
                 case 0x60 ... 0xAF:
-                    return "Zen 4";
+                    return "Raphael (Zen 4)";
                 default:
                     return "Unknown Zen 3 / Zen 4 Processor";
             }
@@ -35,11 +94,11 @@ const char* amd_cpu_get_microarch(unsigned int family, unsigned int model) {
                 case 0x00 ... 0x2F:
                 case 0x40 ... 0x4F:
                 case 0x60 ... 0x7F:
-                    return "Zen 5";
+                    return "Granite Ridge (Zen 5)";
                 case 0x50 ... 0x5F:
                 case 0x90 ... 0xAF:
                 case 0xC0 ... 0xCF:
-                    return "Zen 6";
+                    return "Medusa Point (Zen 6)";
                 default:
                     return "Unknown Zen 5 / Zen 6 Processor";
             }
