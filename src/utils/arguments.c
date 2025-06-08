@@ -22,11 +22,12 @@ int construct_arguments(int argc, const char** argv){
         fflush(stdout);
         return 1;
     }
-
-    // TTY check for pipe output purity. we do not want ansi codes there
+/*
+    TTY check for pipe output purity. we do not want ansi codes there
     if(!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO)){
         arguments.no_ansi = 1;
     }
+*/
 
     return 0;
 }
@@ -34,4 +35,5 @@ int construct_arguments(int argc, const char** argv){
 args_t get_arguments(void){
     return arguments;
 }
+
 
