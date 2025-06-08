@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include <system/hardware/CPU/cpu.h>
+#include <system/hardware/CPU/specifications.h>
 #include <utils/arguments.h>
 #include <utils/terminal.h>
 
@@ -18,6 +19,10 @@ cpu_t init_cpu(void) {
     cpu.ext_family  = cpu_get_extended_family();
     cpu.vendor      = cpu_get_vendor();
     cpu.revision    = cpu_get_revision();
+
+    cpu.logical_processors = amd_cpu_get_logical_processor_count();
+    cpu.physical_processors = cpu_get_physical_core_count();
+    cpu.threads_per_core = amd_cpu_get_thread_per_core();
     return cpu;
 }
 
@@ -126,10 +131,33 @@ unsigned int cpu_get_full_model() {
     }
 }
 
-/// @brief Gets the stepping/revision value
+/// @brief get the CPU stepping value
+/// @return int stepping/revision
 unsigned int cpu_get_revision() {
     unsigned int eax, ebx, ecx, edx;
     cpuid(1, 0, &eax, &ebx, &ecx, &edx);
     IF_VERBOSE(3) { PRINT_REGISTER_VALUES() }
     return eax & 0xF;
+}
+
+/// @brief gets the amount of physical CPU cores in the package
+/// @return int physical cores
+unsigned int cpu_get_physical_core_count(){
+    IF_VENDOR_AMD({return amd_cpu_get_physical_core_count();});
+    IF_VENDOR_INTEL({return -1;});
+    return -1;
+}
+
+/// @brief gets how many thread each CPU core has
+/// @return 
+unsigned int cpu_get_thread_per_core(){
+    IF_VENDOR_AMD({return amd_cpu_get_thread_per_core();});
+    IF_VENDOR_INTEL({return -1;});
+    return -1;
+}
+
+unsigned int cpu_get_logical_processor_count(){
+    IF_VENDOR_AMD({return amd_cpu_get_logical_processor_count();});
+    IF_VENDOR_INTEL({return -1;});
+    return -1;
 }

@@ -7,12 +7,13 @@
 #include <utils/asciiart.h>
 #include <system/hardware/CPU/cpu.h>
 #include <system/hardware/CPU/microarch.h>
+#include <system/hardware/CPU/specifications.h>
 
 /// @brief Spec Seek Entry Point
 /// @param argc argument count
 /// @param argv argument vector
 int main(int argc, const char** argv){
-    construct_arguments(argc, argv);
+    if (construct_arguments(argc, argv) != 0) return -1;
     if (!get_arguments().no_ansi) CLEAR_SCREEN();
 
     ASCII_DIVIDER("Spec Seek by Mellurboo", BLUE);
@@ -41,7 +42,10 @@ void cpu_info(cpu_t cpu){
         printf("  %sBase Family: %s0x%X\n", BWHITE, RED, cpu.base_family);
         printf("  %sExt. Family: %s0x%X\n", BWHITE, RED, cpu.ext_family);
         printf("%sRevision: %s0x%X", BWHITE, RED, cpu.revision);
-        ASCII_DIVIDER_SMALL_NOTEXT(BRED);
+        ASCII_DIVIDER_SMALL("Specifications", BRED);
+        printf("%sLogical Threads: %s%u\n", BWHITE, RED, cpu.logical_processors);
+        printf("%sPhysical Cores:  %s%u\n", BWHITE, RED, cpu.physical_processors);
+        printf("%sThreads PerCore: %s%u\n", BWHITE, RED, cpu.threads_per_core);
     });
 
     IF_VENDOR_INTEL({

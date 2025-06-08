@@ -5,6 +5,7 @@
 #define _INTEL_VENDOR_STRING   "GenuineIntel"
 
 #define HAS_FEATURE(reg, bit) (((reg) & (1 << (bit))) != 0)
+#define SUPPORTS_LEAF(leaf) if ()
 
 #define IF_VENDOR_AMD(amd_arch_code) \
     do { if (!memcmp(cpu_get_vendor(), _AMD_VENDOR_STRING, (unsigned long)12)) { amd_arch_code } } while (0)
@@ -25,6 +26,10 @@ typedef struct cpu
     unsigned int base_family;
     unsigned int ext_family;
     unsigned int revision;
+
+    unsigned int logical_processors;
+    unsigned int physical_processors;
+    unsigned int threads_per_core;
 }cpu_t;
 
 /// @brief CPUID instruction wrapper that places results from the leaf and subleaf into respective locations
@@ -93,5 +98,9 @@ unsigned int cpu_get_extended_family();
 /// @brief Gets the current CPU revision (stepping)
 /// @return unsigned int stepping number
 unsigned int cpu_get_revision();
+
+/// @brief get the amount of physical cores on the CPU
+/// @return int processors
+unsigned int cpu_get_physical_core_count();
 
 #endif
